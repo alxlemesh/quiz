@@ -33,7 +33,7 @@ $quizzes = getAllQuizzes();
 
         <?php if (empty($quizzes)): ?>
             <div class="text-center bg-white rounded shadow-sm p-5">
-                <p class="text-muted fs-5 mb-3">No quizzes yet. Be the first to create one!</p>
+                <p class="text-muted fs-5 mb-3">No quizzes yet</p>
                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true): ?>
                     <a href="create_quiz.php" class="btn btn-primary">+ Create Quiz</a>
                 <?php endif; ?>

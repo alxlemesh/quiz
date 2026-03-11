@@ -70,7 +70,6 @@ $percent = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100) : 0;
             <h1 class="h3 mb-0"><?= htmlspecialchars($quiz['name']) ?></h1>
             <a href="index.php" class="btn btn-primary btn-sm">Back to Menu</a>
         </div>
-
         <?php if ($quiz['description']): ?>
             <p class="text-muted mb-4"><?= htmlspecialchars($quiz['description']) ?></p>
         <?php endif; ?>
@@ -79,7 +78,6 @@ $percent = $totalQuestions > 0 ? round(($score / $totalQuestions) * 100) : 0;
 
             <div class="alert <?= $percent >= 70 ? 'alert-success' : 'alert-danger' ?> text-center py-4 mb-4">
                 <h2 class="h4 fw-bold">Your Score: <?= $score ?> / <?= $totalQuestions ?> (<?= $percent ?>%)</h2>
-                <p class="mb-0"><?= $percent >= 70 ? 'Great job!' : 'Keep practicing!' ?></p>
             </div>
 
             <div class="d-flex flex-column gap-3 mb-4">
