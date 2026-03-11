@@ -38,19 +38,6 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `quiz_id`, `quiestion`, `answers`) VALUES
-(1, 1, 'TEST', '[{\"text\":\"ee\",\"correct\":false},{\"text\":\"eef\",\"correct\":true}]'),
-(2, 1, 'erg', '[{\"text\":\"WW\",\"correct\":false},{\"text\":\"w\",\"correct\":true}]'),
-(3, 2, 'are you pregnant', '[{\"text\":\"yes\",\"correct\":true},{\"text\":\"no\",\"correct\":false}]'),
-(4, 2, 'what is 2+2', '[{\"text\":\"1\",\"correct\":false},{\"text\":\"2\",\"correct\":true},{\"text\":\"3\",\"correct\":false},{\"text\":\"4\",\"correct\":false},{\"text\":\"5\",\"correct\":false}]'),
-(5, 2, 'LONGUS', '[{\"text\":\"true\",\"correct\":false},{\"text\":\"false\",\"correct\":false},{\"text\":\"null\",\"correct\":true}]'),
-(6, 3, 'erf', '[{\"text\":\"ee\",\"correct\":true},{\"text\":\"dd\",\"correct\":false}]'),
-(7, 4, '1', '[{\"text\":\"incor\",\"correct\":true},{\"text\":\"correct1\",\"correct\":false}]'),
-(8, 4, '2', '[{\"text\":\"cor\",\"correct\":false},{\"text\":\"incor\",\"correct\":true}]'),
-(9, 4, '3', '[{\"text\":\"incor\",\"correct\":false},{\"text\":\"cor\",\"correct\":false},{\"text\":\"\",\"correct\":true}]'),
-(10, 5, 'ddd', '[{\"text\":\"inc\",\"correct\":false},{\"text\":\"cor\",\"correct\":false}]'),
-(11, 6, 'e', '[{\"text\":\"inc\",\"correct\":false},{\"text\":\"cor\",\"correct\":true}]');
-
 -- --------------------------------------------------------
 
 --
@@ -68,14 +55,6 @@ CREATE TABLE `quiziz` (
 -- Dumping data for table `quiziz`
 --
 
-INSERT INTO `quiziz` (`id`, `name`, `description`, `date_added`) VALUES
-(1, '1', '1111', '2026-03-06'),
-(2, 'TEST PREGNANCY', 'quick pregnancy test', '2026-03-06'),
-(3, 'd', 'ef', '2026-03-06'),
-(4, 'ddddd', '', '2026-03-06'),
-(5, 'TEST PREGNANCY2', '', '2026-03-06'),
-(6, 'TEST PREGNANCY3', '', '2026-03-06');
-
 -- --------------------------------------------------------
 
 --
@@ -92,20 +71,6 @@ CREATE TABLE `results` (
 --
 -- Dumping data for table `results`
 --
-
-INSERT INTO `results` (`id`, `username`, `quizId`, `result`) VALUES
-(1, 'root', 1, 1),
-(2, 'root', 1, 1),
-(3, 'root', 1, 2),
-(4, 'root', 2, 0),
-(5, 'root', 3, 0),
-(6, 'root', 4, 0),
-(7, 'root', 4, 0),
-(8, 'root', 4, 1),
-(9, 'root', 5, 0),
-(10, 'root', 6, 1),
-(11, 'root', 6, 1),
-(12, 'root', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -162,19 +127,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `quiziz`
 --
 ALTER TABLE `quiziz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
