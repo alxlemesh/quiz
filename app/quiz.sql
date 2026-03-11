@@ -81,15 +81,16 @@ CREATE TABLE `results` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` text NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `is_admin` BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'root', 'lbhtrnjh');
+INSERT INTO `users` (`id`, `username`, `password`, `is_admin`) VALUES
+(1, 'root', 'lbhtrnjh', TRUE);
 
 --
 -- Indexes for dumped tables

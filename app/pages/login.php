@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_regenerate_id(true);
         $_SESSION['user_id']   = $user['id'];
         $_SESSION['username']  = $user['username'];
+        $_SESSION['is_admin']  = (bool)$user['is_admin'];
         header('Location: index.php');
         exit;
     } else {
@@ -51,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn btn-primary w-100">Log In</button>
         </form>
+        <div class="text-center mt-3">
+            <p class="mb-0">Don't have an account? <a href="register.php" class="text-decoration-none">Register here</a></p>
+        </div>
     </div>
 </body>
 </html>

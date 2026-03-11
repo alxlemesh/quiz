@@ -24,7 +24,9 @@ $quizzes = getAllQuizzes();
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 <span class="text-muted small">Logged in as <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></span>
                 <a href="results.php" class="btn btn-sm" style="background:#8e44ad;color:#fff;">My Results</a>
-                <a href="create_quiz.php" class="btn btn-primary btn-sm">+ Create Quiz</a>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true): ?>
+                    <a href="create_quiz.php" class="btn btn-primary btn-sm">+ Create Quiz</a>
+                <?php endif; ?>
                 <a href="../utils/logout.php" class="btn btn-danger btn-sm">Logout</a>
             </div>
         </div>
@@ -32,7 +34,9 @@ $quizzes = getAllQuizzes();
         <?php if (empty($quizzes)): ?>
             <div class="text-center bg-white rounded shadow-sm p-5">
                 <p class="text-muted fs-5 mb-3">No quizzes yet. Be the first to create one!</p>
-                <a href="create_quiz.php" class="btn btn-primary">+ Create Quiz</a>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true): ?>
+                    <a href="create_quiz.php" class="btn btn-primary">+ Create Quiz</a>
+                <?php endif; ?>
             </div>
         <?php else: ?>
             <div class="row g-3">

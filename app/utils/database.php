@@ -14,7 +14,7 @@ function getConnection(): mysqli
 function authenticateUser(string $username, string $password): ?array
 {
     $conn = getConnection();
-    $result = $conn->query("SELECT id, username FROM users WHERE username = '" . $conn->real_escape_string($username) . "' AND password = '" . $conn->real_escape_string($password) . "'");
+    $result = $conn->query("SELECT id, username, is_admin FROM users WHERE username = '" . $conn->real_escape_string($username) . "' AND password = '" . $conn->real_escape_string($password) . "'");
     $user = $result && $result->num_rows === 1 ? $result->fetch_assoc() : null;
     $conn->close();
     return $user;
@@ -122,4 +122,19 @@ function getResultsByUsername(string $username): array
     }
     $conn->close();
     return $results;
+}
+
+
+function registerUser(string $username, string $password): bool
+{
+    $conn = getConnection();
+    $checkResult = $conn->query("SELECT id FROM users WHERE username = '" . $conn->real_escape_string($username) . "'");
+    if ($checkResult && $checkResult->num_rows > 0) {
+        $conn->close();
+        return false;
+    }
+    $conn->query("INSERT INTO users (username, password, is_admin) VALUES ('" . $conn->real_escape_string($username) . "', '" . $conn->real_escape_string($password) . "', FALSE)");
+    $success = $conn->affected_rows > 0;
+    $conn->close();
+    return $success;
 }
