@@ -47,7 +47,7 @@ CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `answer_text` text NOT NULL,
-  `is_correct` tinyint(1) NOT NULL DEFAULT 0
+  `is_correct` BOOLEAN NOT NULL DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
