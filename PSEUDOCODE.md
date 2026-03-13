@@ -1,10 +1,7 @@
-# SQL Pseudocode (queries used in this project)
-
-This file intentionally contains **only SQL** derived from the project’s existing queries/schema.
-
+# Pseudocode of queries
 ---
 
-## 1) Database schema (DDL) — `app/quiz.sql`
+## 1) DDL
 
 ```sql
 CREATE TABLE quiziz (
@@ -46,9 +43,9 @@ CREATE TABLE users (
 );
 ```
 
-Seed user (from dump):
+Seed user:
 ```sql
-INSERT INTO users (id, username, password, is_admin)
+insert INTO users (id, username, password, is_admin)
 VALUES (1, 'root', 'lbhtrnjh', TRUE);
 ```
 
@@ -56,7 +53,7 @@ VALUES (1, 'root', 'lbhtrnjh', TRUE);
 
 ## 2) Authentication — `app/utils/database.php`
 
-Login:
+login:
 ```sql
 SELECT id, username, is_admin
 FROM users
@@ -64,16 +61,14 @@ WHERE username = :username
   AND password = :password;
 ```
 
-Registration (uniqueness check):
+registration
 ```sql
 SELECT id
 FROM users
 WHERE username = :username;
-```
 
-Registration (insert):
-```sql
-INSERT INTO users (username, password, is_admin)
+
+insert INTO users (username, password, is_admin)
 VALUES (:username, :password, FALSE);
 ```
 
@@ -81,7 +76,7 @@ VALUES (:username, :password, FALSE);
 
 ## 3) Quizzes
 
-Get all quizzes + question count:
+get all quizzes + question count:
 ```sql
 SELECT q.id, q.name, q.description, q.date_added,
        COUNT(qu.id) AS question_count
@@ -91,7 +86,7 @@ GROUP BY q.id
 ORDER BY q.date_added DESC;
 ```
 
-Get quiz by id:
+get quiz by id:
 ```sql
 SELECT id, name, description
 FROM quiziz
@@ -102,19 +97,19 @@ WHERE id = :quizId;
 
 ## 4) Questions (as implemented in code)
 
-Insert quiz:
+insert quiz:
 ```sql
-INSERT INTO quiziz (name, description)
+insert INTO quiziz (name, description)
 VALUES (:name, :description);
 ```
 
-Insert question (note: code expects an `answers` column on `questions`):
+insert question
 ```sql
-INSERT INTO questions (quiz_id, quiestion, answers)
+insert INTO questions (quiz_id, quiestion, answers)
 VALUES (:quizId, :questionText, :answersJson);
 ```
 
-Get questions by quiz id (note: code selects `answers` column from `questions`):
+get questions by quiz id
 ```sql
 SELECT id, quiestion, answers
 FROM questions
@@ -126,13 +121,13 @@ ORDER BY id;
 
 ## 5) Results
 
-Insert result:
+insert result:
 ```sql
-INSERT INTO results (username, quizId, result)
+insert INTO results (username, quizId, result)
 VALUES (:username, :quizId, :score);
 ```
 
-Get results by username:
+get results by username:
 ```sql
 SELECT r.id AS result_id,
        r.result AS score,
