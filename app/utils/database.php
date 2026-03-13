@@ -55,8 +55,21 @@ function insertQuiz(string $name, string $description): int
 
 function insertQuestion(int $quizId, string $questionText, string $answersJson): void
 {
+    // `answersJson` is legacy payload (JSON array of {text, correct}) coming from create_quiz.php.
+    // The DB schema stores answers in a separate `answers` table.
     $conn = getConnection();
-    $conn->query("INSERT INTO questions (quiz_id, quiestion, answers) VALUES ($quizId, '" . $conn->real_escape_string($questionText) . "', '" . $conn->real_escape_string($answersJson) . "')");
+
+    $questionTextEsc = $conn->real_escape_string($questionText);
+    $conn->query("INSERT INTO questions (quiz_id, quiestion) VALUES ($quizId, '$questionTextEsc')");
+    $questionId = (int)$conn->insert_id;
+
+    $answers = parseAnswers($answersJson);
+    foreach ($answers as $a) {
+        $text = $conn->real_escape_string((string)($a['text'] ?? ''));
+        $isCorrect = !empty($a['correct']) ? 1 : 0;
+        $conn->query("INSERT INTO answers (question_id, answer_text, is_correct) VALUES ($questionId, '$text', $isCorrect)");
+    }
+
     $conn->close();
 }
 
@@ -74,14 +87,29 @@ function getQuizById(int $quizId): ?array
 function getQuestionsByQuizId(int $quizId): array
 {
     $conn = getConnection();
-    $result = $conn->query("SELECT id, quiestion, answers FROM questions WHERE quiz_id = $quizId ORDER BY id");
+    $result = $conn->query("SELECT id, quiestion FROM questions WHERE quiz_id = $quizId ORDER BY id");
+
     $questions = [];
     if ($result) {
         while ($row = $result->fetch_assoc()) {
-            $row['parsed_answers'] = parseAnswers($row['answers']);
+            $qId = (int)$row['id'];
+
+            $ansRes = $conn->query("SELECT answer_text, is_correct FROM answers WHERE question_id = $qId ORDER BY id");
+            $parsed = [];
+            if ($ansRes) {
+                while ($a = $ansRes->fetch_assoc()) {
+                    $parsed[] = [
+                        'text' => (string)$a['answer_text'],
+                        'correct' => (bool)$a['is_correct'],
+                    ];
+                }
+            }
+
+            $row['parsed_answers'] = $parsed;
             $questions[] = $row;
         }
     }
+
     $conn->close();
     return $questions;
 }
