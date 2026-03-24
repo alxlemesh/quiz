@@ -33,27 +33,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-        <h1 class="text-center mb-4">Login</h1>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Login</h1>
         <?php if ($error): ?>
-            <div class="alert alert-danger text-center py-2"><?= htmlspecialchars($error) ?></div>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
         <?php endif; ?>
         <form method="POST" action="login.php">
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
             </div>
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Log In</button>
+            <button type="submit" class="btn btn-primary">Log In</button>
         </form>
-        <div class="text-center mt-3">
-            <p class="mb-0">Don't have an account? <a href="register.php" class="text-decoration-none">Register here</a></p>
+        <div class="link-text">
+            <p>Don't have an account? <a href="register.php">Register here</a></p>
         </div>
     </div>
 </body>
