@@ -35,17 +35,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!is_array($selected)) $selected = [$selected];
         $userAnswers[$qId] = $selected;
 
-        // Find correct answer indices
         $correctIndices = [];
         foreach ($q['parsed_answers'] as $i => $a) {
+          /* [
+    ['text' => 'Paris', 'correct' => true],
+    ['text' => 'London', 'correct' => false],
+    ['text' => 'Berlin', 'correct' => true]
+]*/
             if ($a['correct']) {
                 $correctIndices[] = (string)$i;
             }
         }
+        //na czas terazniejszy istnieje mozliwosc robienia pytan tylko z 1 odpowiedzia, a logika wyzej jest zrobiona dla prostszego rozwijecia logiki w przyszlosci
 
-        // Check if user's selection matches correct answers exactly
+        // Check if users selection matches correct answers exactly
         sort($selected);
         sort($correctIndices);
+        /* Without sorting, ["2", "0"] !== ["0", "2"] even though they contain the same values. Sorting ensures the order doesn't matter — only the actual selections do.
+
+Result: If the arrays match exactly, the user gets 1 point added to their score.*/
         if ($selected === $correctIndices) {
             $score++;
         }

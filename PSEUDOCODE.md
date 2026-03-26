@@ -1,143 +1,43 @@
-# Pseudocode of queries
----
+Pseudocode of main app logic:
 
-## 1) DDL
+register:
 
-```sql
-CREATE TABLE quiziz (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(30) NOT NULL,
-  description TEXT NOT NULL,
-  date_added DATE NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+ON POST request:
 
-CREATE TABLE questions (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  quiz_id INT NOT NULL,
-  quiestion TEXT NOT NULL,
-  FOREIGN KEY (quiz_id) REFERENCES quiziz(id) ON DELETE CASCADE
-);
-
-CREATE TABLE answers (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  question_id INT NOT NULL,
-  answer_text TEXT NOT NULL,
-  is_correct BOOLEAN NOT NULL DEFAULT FALSE,
-  FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
-);
-
-CREATE TABLE results (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username TEXT NOT NULL,
-  quizId INT NOT NULL,
-  result INT NOT NULL,
-  date_completed DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (quizId) REFERENCES quiziz(id) ON DELETE CASCADE
-);
-
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username TEXT NOT NULL,
-  password TEXT NOT NULL,
-  is_admin BOOLEAN NOT NULL DEFAULT FALSE
-);
-```
-
-Seed user:
-```sql
-insert INTO users (id, username, password, is_admin)
-VALUES (1, 'root', 'lbhtrnjh', TRUE);
-```
-
----
-
-## 2) Authentication — `app/utils/database.php`
+1. Get username, email, password from request
+2. Validate all fields are not empty
+3. Check if username exists: SELECT id FROM users WHERE username = ?
+4. Check if email exists: SELECT id FROM users WHERE email = ?
+5. Hash password: password_hash(password, PASSWORD_BCRYPT)
+6. Insert user: INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)
+7. Redirect to login page
 
 login:
-```sql
-SELECT id, username, is_admin
-FROM users
-WHERE username = :username
-  AND password = :password;
-```
 
-registration
-```sql
-SELECT id
-FROM users
-WHERE username = :username;
+ON POST request:
 
+1. Get username/email and password from request
+2. Find user: SELECT id, username, password_hash FROM users WHERE username = ? OR email = ?
+3. If user not found: show error "Invalid credentials"
+4. Verify password: password_verify(password, password_hash)
+5. If invalid: show error "Invalid credentials"
+6. If valid:
+   - Start session
+   - Set $SESSION['user_id'] = user.id
+   - Set $SESSION['username'] = user.username
+   - Redirect to dashboard
+   - if isAdmin=true -> add SESSION['is_admin'] = true flag
 
-insert INTO users (username, password, is_admin)
-VALUES (:username, :password, FALSE);
-```
+solve.php:
+1.Get the quiz ID from the URL query parameter (e.g., solve.php?id=5)
+2.Validate that the quiz ID is a positive integer (validation failes -> redirect to index.php) 3. 3. Fetch quiz data fom database 4. parse questions on the page
 
----
+on sumbit:
+1.for each question, get answer array sequence, after sort it and compare with correct answers in DB, if coorect -> score++ 2. compose and send results to database
 
-## 3) Quizzes
+results.php
+1.fetching quiz results for user using sql sequence builder from daatabase.php (require_once usage)
 
-get all quizzes + question count:
-```sql
-SELECT q.id, q.name, q.description, q.date_added,
-       COUNT(qu.id) AS question_count
-FROM quiziz q
-LEFT JOIN questions qu ON qu.quiz_id = q.id
-GROUP BY q.id
-ORDER BY q.date_added DESC;
-```
-
-get quiz by id:
-```sql
-SELECT id, name, description
-FROM quiziz
-WHERE id = :quizId;
-```
-
----
-
-## 4) Questions (as implemented in code)
-
-insert quiz:
-```sql
-insert INTO quiziz (name, description)
-VALUES (:name, :description);
-```
-
-insert question
-```sql
-insert INTO questions (quiz_id, quiestion, answers)
-VALUES (:quizId, :questionText, :answersJson);
-```
-
-get questions by quiz id
-```sql
-SELECT id, quiestion, answers
-FROM questions
-WHERE quiz_id = :quizId
-ORDER BY id;
-```
-
----
-
-## 5) Results
-
-insert result:
-```sql
-insert INTO results (username, quizId, result)
-VALUES (:username, :quizId, :score);
-```
-
-get results by username:
-```sql
-SELECT r.id AS result_id,
-       r.result AS score,
-       r.quizId,
-       q.name AS quiz_name,
-       COUNT(qu.id) AS total_questions
-FROM results r
-JOIN quiziz q ON q.id = r.quizId
-LEFT JOIN questions qu ON qu.quiz_id = q.id
-WHERE r.username = :username
-GROUP BY r.id
-ORDER BY r.id ASC;
-```
+create_quiz.php
+1.JS functions to add/delete questions and answers for them
+2.form them in object using php potential vulnerabilities and send post request 3. Parse and create quiz by inserting questions and answers in different tables(handling again in database.php)

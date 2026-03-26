@@ -136,5 +136,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         addQuestion();
     </script>
+    <!-- $_POST = [
+    'name' => 'Quiz Name',
+    'description' => 'Optional description',
+    'questions' => [
+        0 => [
+            'text' => 'First question text',
+            'answers' => [
+                0 => ['text' => 'Answer 1'],
+                1 => ['text' => 'Answer 2'],
+                // ...
+            ],
+            'correct' => 0  // Index of correct answer (0, 1, 2, etc.)
+        ],
+        1 => [
+            'text' => 'Second question text',
+            'answers' => [
+                0 => ['text' => 'Answer 1'],
+                1 => ['text' => 'Answer 2'],
+            ],
+            'correct' => 1
+        ],
+        // ... more questions
+    ]
+]; -->
+<script>
+  //!object structure for post request(b.b most cummon question)
+</script>
 </body>
 </html>
