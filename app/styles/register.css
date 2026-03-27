@@ -6,7 +6,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f8f9fa;
+    background: url('https://images.alphacoders.com/137/thumb-1920-1375143.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -14,9 +17,9 @@ body {
 }
 
 .register-container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    background: #374955;
+    border: 2px solid #F62A66;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     padding: 32px;
     width: 100%;
     max-width: 400px;
@@ -25,25 +28,24 @@ body {
 .register-title {
     text-align: center;
     margin-bottom: 24px;
-    color: #212529;
+    color: #FFD933;
     font-size: 1.75rem;
 }
 
 .alert {
     padding: 10px 16px;
-    border-radius: 6px;
     margin-bottom: 16px;
     text-align: center;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #842029;
+    background-color: #F62A66;
+    color: #fff;
 }
 
 .alert-success {
-    background-color: #d1e7dd;
-    color: #0f5132;
+    background-color: #198754;
+    color: #fff;
 }
 
 .form-group {
@@ -54,29 +56,28 @@ body {
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
-    color: #212529;
+    color: #FFD933;
 }
 
 .form-control {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
+    border: 2px solid #F62A66;
     font-size: 1rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background: #fff;
+    color: #374955;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: #86b7fe;
-    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+    border-color: #FFD933;
 }
 
 .form-text {
     display: block;
     margin-top: 4px;
     font-size: 0.875rem;
-    color: #6c757d;
+    color: #FFD933;
 }
 
 .btn {
@@ -87,29 +88,28 @@ body {
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
     width: 100%;
 }
 
 .btn-primary {
-    background-color: #0d6efd;
+    background-color: #F62A66;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0b5ed7;
+    background-color: #FFD933;
+    color: #374955;
 }
 
 .link-text {
     text-align: center;
     margin-top: 16px;
-    color: #212529;
+    color: #FFD933;
 }
 
 .link-text a {
-    color: #0d6efd;
+    color: #FFD933;
     text-decoration: none;
 }
 

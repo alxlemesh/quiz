@@ -6,7 +6,10 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f8f9fa;
+    background: url('https://images.alphacoders.com/137/thumb-1920-1375143.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container {
@@ -27,7 +30,7 @@ body {
 .page-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #212529;
+    color: #FFD933;
     margin: 0;
 }
 
@@ -39,12 +42,12 @@ body {
 }
 
 .user-greeting {
-    color: #6c757d;
+    color: #FFD933;
     font-size: 0.875rem;
 }
 
 .user-greeting strong {
-    color: #212529;
+    color: #fff;
 }
 
 .btn {
@@ -55,36 +58,37 @@ body {
     text-align: center;
     text-decoration: none;
     border: none;
-    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
 .btn-results {
-    background-color: #8e44ad;
+    background-color: #F62A66;
     color: #fff;
 }
 
 .btn-results:hover {
-    background-color: #7d3c98;
+    background-color: #FFD933;
+    color: #374955;
 }
 
 .btn-primary {
-    background-color: #0d6efd;
+    background-color: #F62A66;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0b5ed7;
+    background-color: #FFD933;
+    color: #374955;
 }
 
 .btn-danger {
-    background-color: #dc3545;
+    background-color: #F62A66;
     color: #fff;
 }
 
 .btn-danger:hover {
-    background-color: #bb2d3b;
+    background-color: #FFD933;
+    color: #374955;
 }
 
 .btn-success {
@@ -93,19 +97,20 @@ body {
 }
 
 .btn-success:hover {
-    background-color: #157347;
+    background-color: #FFD933;
+    color: #374955;
 }
 
 .empty-state {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #374955;
+    border: 2px solid #F62A66;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     padding: 48px 16px;
     text-align: center;
 }
 
 .empty-state p {
-    color: #6c757d;
+    color: #FFD933;
     font-size: 1.125rem;
     margin-bottom: 16px;
 }
@@ -129,9 +134,9 @@ body {
 }
 
 .quiz-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #374955;
+    border: 2px solid #F62A66;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -155,23 +160,22 @@ body {
 .quiz-title {
     font-size: 1rem;
     font-weight: 600;
-    color: #212529;
+    color: #FFD933;
     margin: 0;
     word-break: break-word;
 }
 
 .quiz-badge {
-    background-color: #cfe2ff;
-    color: #084298;
+    background-color: #F62A66;
+    color: #fff;
     padding: 4px 10px;
-    border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
 }
 
 .quiz-description {
-    color: #6c757d;
+    color: #FFD933;
     font-size: 0.875rem;
     flex: 1;
 }
@@ -184,6 +188,6 @@ body {
 }
 
 .quiz-date {
-    color: #6c757d;
+    color: #FFD933;
     font-size: 0.75rem;
 }
